@@ -30,27 +30,31 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-const movePiece = () => {
-  // Your code here
-
+// move piece from one stack to another
+const movePiece = (startStack, endStack) => {
+  // startStack to endStack
+  let piece = stacks[startStack].pop()
+  stacks[endStack].push(piece)
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
-  // Your code here
-
+const isLegal = (startStack, endStack) => {
+  // if piece[0] is greater than current piece, its legal
+  
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
 const checkForWin = () => {
-  // Your code here
+  // Did 4,3,2,1 move from A to C with no illegal moves
 
 }
 
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
-  // Your code here
+  // Grabs the smallest num/lastOf startStack and moves it
 
+
+  movePiece(startStack, endStack)
 }
 
 const getPrompt = () => {
@@ -73,6 +77,8 @@ if (typeof describe === 'function') {
       assert.deepEqual(stacks, { a: [4, 3, 2], b: [1], c: [] });
     });
   });
+
+  // add movePiece function
 
   describe('#isLegal()', () => {
     it('should not allow an illegal move', () => {
