@@ -40,21 +40,31 @@ const movePiece = (startStack, endStack) => {
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
 const isLegal = (startStack, endStack) => {
   // if piece[0] is greater than current piece, its legal
-  
+  // console.log(stacks[startStack].at(-1))
+  if(stacks[startStack].at(-1) > stacks[endStack].at(-1)){
+    return false
+  } else {
+    return true
+  }
 }
+
 
 // What is a win in Towers of Hanoi? When should this function run?
 const checkForWin = () => {
   // Did 4,3,2,1 move from A to C with no illegal moves
-
+  if(stacks.b.length === 4 || stacks.c.length === 4){
+    return true
+  } else {
+    return false
+  }
 }
 
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
   // Grabs the smallest num/lastOf startStack and moves it
-
-
   movePiece(startStack, endStack)
+  isLegal(startStack, endStack)
+  checkForWin()
 }
 
 const getPrompt = () => {
@@ -78,7 +88,33 @@ if (typeof describe === 'function') {
     });
   });
 
-  // add movePiece function
+  //New Test
+  describe('#towersOfHanoi()', () => {
+    it('check that stack a has all 4 pieces', () => {
+      stacks = {
+        a: [4, 3, 2, 1],
+        b: [],
+        c: []
+      };
+    });
+  });
+
+//New Test
+  describe('#printStacks()', () => {
+    it('checks that stacks are printed', () => {
+      console.log("a: " + stacks.a);
+      console.log("b: " + stacks.b);
+      console.log("c: " + stacks.c);
+    })
+  })
+
+  describe('#movePiece()', () => {
+    it('checks that a piece moved', () => {
+      movePiece('a', 'b');
+      assert.deepEqual(stacks, { a: [4, 3, 2], b: [1], c: [] });
+    })
+  }) 
+  
 
   describe('#isLegal()', () => {
     it('should not allow an illegal move', () => {
